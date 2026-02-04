@@ -32,9 +32,15 @@ def create_task_service(request: TaskCreateRequest):
     ai_suggestion = handle_task_created(event)
 
     # 4. AI 판단 결과 저장
-    db.add(ai_suggestion)
+    ai_suggestion_model = AITaskSuggestion(
+        task_id=ai_suggestion.task_id,
+        result=ai_suggestion.result,
+        model=ai_suggestion.model,
+        created_at=ai_suggestion.created_at
+    )
+    db.add(ai_suggestion_model)
     db.commit()
-    db.refresh(ai_suggestion)
+    db.refresh(ai_suggestion_model)
 
     return {
         "task": {
@@ -45,10 +51,10 @@ def create_task_service(request: TaskCreateRequest):
             "status": task.status
         },
         "ai_suggestion": {
-            "task_id": ai_suggestion.task_id,
-            "result": ai_suggestion.result,
-            "model": ai_suggestion.model,
-            "created_at": ai_suggestion.created_at
+            "task_id": ai_suggestion_model.task_id,
+            "result": ai_suggestion_model.result,
+            "model": ai_suggestion_model.model,
+            "created_at": ai_suggestion_model.created_at
         }
     }
 

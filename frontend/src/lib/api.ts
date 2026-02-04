@@ -1,9 +1,12 @@
 import { TaskRequest, TaskResponse } from "@/types/task"
 
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
+
 export async function createTask(
   payload: TaskRequest
 ): Promise<TaskResponse> {
-  const res = await fetch("http://localhost:8000/api/tasks", {
+  const res = await fetch(`${API_BASE_URL}/api/tasks`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +28,7 @@ export async function renderDecisionText(
 ): Promise<{ text: string }> {
 
   const res = await fetch(
-    `http://localhost:8000/api/tasks/${taskId}/decision-text`,
+    `${API_BASE_URL}/api/tasks/${taskId}/decision-text`,
     {
       method: "POST",
       headers: {

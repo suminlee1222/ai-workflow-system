@@ -12,6 +12,9 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
+
 export default function Page() {
   const [content, setContent] = useState("")
   const [taskId, setTaskId] = useState<number | null>(null)
@@ -35,7 +38,7 @@ export default function Page() {
     setTaskId(null)
 
     try {
-      const res = await fetch("http://localhost:8000/api/tasks", {
+      const res = await fetch(`${API_BASE_URL}/api/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,7 +67,7 @@ export default function Page() {
   useEffect(() => {
     if (!taskId) return
 
-    fetch(`http://localhost:8000/api/tasks/${taskId}`)
+    fetch(`${API_BASE_URL}/api/tasks/${taskId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.ai_suggestion?.result) {

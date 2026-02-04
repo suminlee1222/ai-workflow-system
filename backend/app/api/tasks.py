@@ -6,6 +6,8 @@ from app.domain.services.task_service import (
     get_task_service,
 )
 from app.schemas.decision import DecisionRenderRequest, DecisionRenderResponse
+from app.domain.services.decision_service import render_decision_text_service
+from app.ai.render_modes import DecisionRenderMode
 
 router = APIRouter()
 
@@ -40,7 +42,7 @@ def render_decision_text(
     """
     result = render_decision_text_service(
         task_id=task_id,
-        mode=request.mode
+        mode=DecisionRenderMode(request.mode)
     )
 
     if result is None:

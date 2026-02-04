@@ -4,14 +4,15 @@ services:
   postgres:
     image: postgres:15
     container_name: ai_workflow_postgres
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_DB: ai_workflow
       POSTGRES_USER: ai_user
       POSTGRES_PASSWORD: ai_pass
     volumes:
       - pgdata:/var/lib/postgresql/data
+    # ⛔ 외부 공개 필요 없으면 주석 유지
+    # ports:
+    #   - "5432:5432"
 
   backend:
     build:
@@ -25,7 +26,7 @@ services:
       DB_NAME: ai_workflow
       DB_USER: ai_user
       DB_PASSWORD: ai_pass
-      CORS_ALLOW_ORIGINS: http://localhost:3000
+      CORS_ALLOW_ORIGINS: http://149.118.149.162:3000
     depends_on:
       - postgres
 
@@ -33,12 +34,12 @@ services:
     build:
       context: ./frontend
       args:
-        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_API_URL: http://149.118.149.162:8000
     container_name: ai_workflow_frontend
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8000
+      NEXT_PUBLIC_API_URL: http://149.118.149.162:8000
     depends_on:
       - backend
 

@@ -17,6 +17,14 @@ export default function Page() {
   const [taskId, setTaskId] = useState<number | null>(null)
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
+  const formatEstimate = (estimate?: string) => {
+    if (!estimate) return "-"
+    const trimmed = estimate.trim()
+    if (trimmed === "unknown") return "알 수 없음"
+    if (/(시간|분)/.test(trimmed)) return trimmed
+    if (/^\d+(\.\d+)?$/.test(trimmed)) return `${trimmed}시간`
+    return trimmed
+  }
 
   /** 업무 생성 + AI 판단 요청 */
   const submit = async () => {
@@ -138,7 +146,7 @@ export default function Page() {
                 <p className="text-sm text-muted-foreground">
                   업무 성격 요약
                 </p>
-                <p className="text-lg font-semibold">
+                <p className="text-base font-semibold">
                   {result.identity?.one_liner}
                 </p>
               </div>
@@ -155,11 +163,11 @@ export default function Page() {
                       🧠 인지적 부담
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-3 text-sm">
                     <Badge variant="secondary">
                       사고 비중: {result.cognitive_load?.thinking_ratio}
                     </Badge>
-                    <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+                    <ul className="list-disc pl-5 text-muted-foreground space-y-1">
                       {result.cognitive_load?.reason?.map(
                         (r: string, i: number) => (
                           <li key={i}>{r}</li>
@@ -176,9 +184,10 @@ export default function Page() {
                       ⏱ 일정 판단
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-3 text-sm">
                     <p className="font-medium">
-                      예상 소요: {result.time_judgement?.total_estimate}
+                      예상 소요 시간:{" "}
+                      {formatEstimate(result.time_judgement?.total_estimate)}
                     </p>
                     <Badge
                       variant={
@@ -199,7 +208,7 @@ export default function Page() {
                       👥 협업 판단
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2">
+                  <CardContent className="space-y-2 text-sm">
                     <p>
                       주 담당 역할:{" "}
                       <strong>
@@ -221,11 +230,11 @@ export default function Page() {
                       ⚡ 우선순위 조언
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2">
+                  <CardContent className="space-y-2 text-sm">
                     <Badge>
                       긴급도: {result.priority_advice?.urgency}
                     </Badge>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground">
                       {result.priority_advice?.reason}
                     </p>
                   </CardContent>

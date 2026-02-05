@@ -6,6 +6,6 @@ class Task(Base):
 
     id = Column(Integer, primary_key=True)
     project_id = Column(Integer, nullable=False)
-    title = Column(String(255), nullable=False)
+    title = Column(Text, nullable=False)
     description = Column(Text)
     status = Column(String(50), nullable=False)

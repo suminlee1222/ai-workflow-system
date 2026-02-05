@@ -212,7 +212,7 @@ export default function TaskDetailPage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3 text-sm text-neutral-700">
-                        <Badge variant="secondary" className="text-sm">
+                        <Badge variant="secondary" className="text-sm font-medium">
                           사고 비중:{" "}
                           {result.cognitive_load?.thinking_ratio}
                         </Badge>
@@ -233,7 +233,7 @@ export default function TaskDetailPage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3 text-sm text-neutral-700">
-                        <p className="text-sm font-semibold text-neutral-800">
+                        <p className="text-sm font-medium text-neutral-800">
                           예상 소요 시간:{" "}
                           {formatEstimate(
                             result.time_judgement?.total_estimate
@@ -249,13 +249,12 @@ export default function TaskDetailPage() {
                           </ul>
                         ) : null}
                         <Badge
-                          variant={
-                            result.time_judgement?.schedule_risk ===
-                            "높음"
-                              ? "destructive"
-                              : "outline"
-                          }
-                          className="text-sm"
+                          variant="outline"
+                          className={`text-sm font-medium ${
+                            result.time_judgement?.schedule_risk === "높음"
+                              ? "border-red-400 bg-red-50 text-red-600"
+                              : "border-neutral-200 bg-white text-neutral-700"
+                          }`}
                         >
                           일정 리스크:{" "}
                           {result.time_judgement?.schedule_risk}
@@ -289,7 +288,7 @@ export default function TaskDetailPage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-2 text-sm text-neutral-700">
-                        <Badge className="text-sm">
+                        <Badge className="text-sm font-medium">
                           긴급도: {result.priority_advice?.urgency}
                         </Badge>
                         <p className="text-sm text-muted-foreground">

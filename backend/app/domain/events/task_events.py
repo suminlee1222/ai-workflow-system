@@ -7,9 +7,7 @@ class TaskCreatedEvent:
         task_id: int,
         project_id: int,
         title: str,
-        description: str,
     ):
         self.task_id = task_id
         self.project_id = project_id
         self.title = title
-        self.description = description

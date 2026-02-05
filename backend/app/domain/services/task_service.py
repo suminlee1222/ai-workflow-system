@@ -32,7 +32,7 @@ def create_task_service(request: TaskCreateRequest):
         task = TaskModel(
             project_id=request.project_id,
             title=request.title,
-            description=request.description,
+            description=None,
             status="CREATED"
         )
         db.add(task)
@@ -43,8 +43,7 @@ def create_task_service(request: TaskCreateRequest):
         event = TaskCreatedEvent(
             task_id=task.id,
             project_id=task.project_id,
-            title=task.title,
-            description=task.description
+            title=task.title
         )
 
         # 3. AI 판단 수행
@@ -60,7 +59,6 @@ def create_task_service(request: TaskCreateRequest):
                 "task_id": task.id,
                 "project_id": task.project_id,
                 "title": task.title,
-                "description": task.description,
                 "status": task.status
             },
             "ai_suggestion": {
@@ -93,7 +91,6 @@ def get_task_service(task_id: int):
                 "task_id": task.id,
                 "project_id": task.project_id,
                 "title": task.title,
-                "description": task.description,
                 "status": task.status
             },
             "ai_suggestion": {
@@ -117,7 +114,6 @@ def get_tasks_service():
                     "task_id": task.id,
                     "project_id": task.project_id,
                     "title": task.title,
-                    "description": task.description,
                     "status": task.status
                 }
                 for task in tasks

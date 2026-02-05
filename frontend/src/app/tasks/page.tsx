@@ -18,7 +18,6 @@ type TaskSummary = {
   task_id: number
   project_id: number
   title: string
-  description?: string | null
   status: string
 }
 
@@ -119,9 +118,6 @@ export default function TaskListPage() {
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm">
-                  <p className="text-muted-foreground line-clamp-3">
-                    {task.description || "설명이 없습니다."}
-                  </p>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <Badge variant="outline">{task.status}</Badge>
                     <Button asChild size="sm">

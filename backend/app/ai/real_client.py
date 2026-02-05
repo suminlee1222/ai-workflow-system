@@ -10,7 +10,6 @@ class OpenAIClient(AIClient):
 
         task = context.get("task", {}) or {}
         title = task.get("title", "")
-        description = task.get("description", "")
 
         recent_titles = [
             t.get("title")
@@ -36,7 +35,6 @@ class OpenAIClient(AIClient):
 
 [업무 정보]
 - 제목: {title}
-- 설명: {description}
 
 [최근 유사 업무]
 {recent_context}

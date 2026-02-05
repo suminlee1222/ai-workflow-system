@@ -1,7 +1,6 @@
 export interface TaskRequest {
   project_id: number
   title: string
-  description: string
 }
 
 export interface AITaskAnalysis {
@@ -52,7 +51,6 @@ export interface TaskResponse {
     task_id: number
     project_id: number
     title: string
-    description: string
     status: string
   }
   ai_suggestion: AISuggestion

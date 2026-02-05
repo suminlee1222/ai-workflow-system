@@ -193,6 +193,15 @@ export default function Page() {
                       예상 소요 시간:{" "}
                       {formatEstimate(result.time_judgement?.total_estimate)}
                     </p>
+                    {result.time_judgement?.estimate_reason?.length ? (
+                      <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                        {result.time_judgement.estimate_reason.map(
+                          (reason: string, index: number) => (
+                            <li key={index}>{reason}</li>
+                          )
+                        )}
+                      </ul>
+                    ) : null}
                     <Badge
                       variant={
                         result.time_judgement?.schedule_risk === "높음"

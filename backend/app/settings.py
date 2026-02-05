@@ -9,9 +9,9 @@ class Settings(BaseSettings):
     # DB 설정
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
-    DB_NAME: str = "ai_workflow"
-    DB_USER: str = "ai_user"
-    DB_PASSWORD: str = "ai_pass"
+    DB_NAME: str = ""
+    DB_USER: str = ""
+    DB_PASSWORD: str = ""
 
     @property
     def DATABASE_URL(self) -> str:

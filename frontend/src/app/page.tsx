@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
+import { formatEstimate } from "@/lib/utils"
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
@@ -21,14 +22,6 @@ export default function Page() {
   const [taskId, setTaskId] = useState<number | null>(null)
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
-  const formatEstimate = (estimate?: string) => {
-    if (!estimate) return "-"
-    const trimmed = estimate.trim()
-    if (trimmed === "unknown") return "알 수 없음"
-    if (/(시간|분)/.test(trimmed)) return trimmed
-    if (/^\d+(\.\d+)?$/.test(trimmed)) return `${trimmed}시간`
-    return trimmed
-  }
 
   /** 업무 생성 + AI 판단 요청 */
   const submit = async () => {

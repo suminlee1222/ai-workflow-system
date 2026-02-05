@@ -20,6 +20,7 @@ export interface AITaskAnalysis {
   }[]
   time_judgement: {
     total_estimate: string
+    estimate_reason: string[]
     schedule_risk: "낮음" | "보통" | "높음"
     risk_reason: string[]
   }
@@ -32,6 +33,10 @@ export interface AITaskAnalysis {
     urgency: "낮음" | "보통" | "높음"
     can_be_deferred: boolean
     reason: string
+  }
+  work_direction: {
+    summary: string
+    next_steps: string[]
   }
 }
 

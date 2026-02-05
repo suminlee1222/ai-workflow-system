@@ -72,15 +72,18 @@ export default function Page() {
   }, [taskId])
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-12">
+    <div className="min-h-screen bg-neutral-100/70">
+      <main className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-12">
 
         {/* 헤더 */}
         <header className="space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            AI Workflow Assist
+          </p>
+          <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
             업무 판단 보조 시스템
           </h1>
-          <p className="text-muted-foreground text-base">
+          <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
             업무를 요약하지 않습니다.
             <br />
             다음 결정을 내리기 위한 <strong>판단 근거</strong>를 제공합니다.
@@ -88,10 +91,12 @@ export default function Page() {
         </header>
 
         {/* 입력 카드 */}
-        <Card>
+        <Card className="border border-neutral-200/70 bg-white shadow-sm">
           <CardHeader className="space-y-2">
-            <CardTitle>업무 입력</CardTitle>
-            <p className="text-sm text-muted-foreground">
+            <CardTitle className="text-base font-semibold text-neutral-900">
+              업무 입력
+            </CardTitle>
+            <p className="text-sm leading-relaxed text-muted-foreground">
               지금 하려는 업무를 자유롭게 적어주세요.
               <br />
               정리가 안 되어 있어도 괜찮습니다.
@@ -113,11 +118,11 @@ export default function Page() {
               onChange={(e) =>
                 setContent(e.target.value)
               }
-              className="resize-none"
+              className="resize-none border-neutral-200/80 bg-white text-sm leading-relaxed text-neutral-800 shadow-inner"
             />
 
             <Button
-              className="w-full"
+              className="w-full text-sm font-semibold"
               onClick={submit}
               disabled={!content || loading}
             >
@@ -128,29 +133,31 @@ export default function Page() {
 
         {/* 결과 영역 */}
         {result && (
-          <Card className="border-l-4 border-blue-500">
-            <CardHeader className="space-y-1">
-              <CardTitle>AI 판단 결과</CardTitle>
+          <Card className="border border-neutral-200/70 bg-white shadow-sm">
+            <CardHeader className="space-y-2 border-b border-neutral-200/60">
+              <CardTitle className="text-base font-semibold text-neutral-900">
+                AI 판단 결과
+              </CardTitle>
               {taskId && (
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs font-medium text-muted-foreground">
                     업무 ID #{taskId} · 판단 기록 기반
                   </p>
-                  <Button asChild variant="outline" size="sm">
+                  <Button asChild variant="outline" size="sm" className="text-xs">
                     <Link href={`/tasks/${taskId}`}>상세 보기</Link>
                   </Button>
                 </div>
               )}
             </CardHeader>
 
-            <CardContent className="space-y-10">
+            <CardContent className="space-y-10 pt-6">
 
               {/* 한 줄 요약 */}
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">
+              <div className="space-y-2">
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                   업무 성격 요약
                 </p>
-                <p className="text-base font-semibold">
+                <p className="text-base font-semibold text-neutral-900">
                   {result.identity?.one_liner}
                 </p>
               </div>
@@ -158,20 +165,20 @@ export default function Page() {
               <Separator />
 
               {/* 판단 카드 그리드 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 
                 {/* 인지적 부담 */}
-                <Card>
+                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base font-semibold text-neutral-900">
                       🧠 인지적 부담
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3 text-sm">
+                  <CardContent className="space-y-3 text-sm text-neutral-700">
                     <Badge variant="secondary">
                       사고 비중: {result.cognitive_load?.thinking_ratio}
                     </Badge>
-                    <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                    <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                       {result.cognitive_load?.reason?.map(
                         (r: string, i: number) => (
                           <li key={i}>{r}</li>
@@ -182,19 +189,19 @@ export default function Page() {
                 </Card>
 
                 {/* 일정 판단 */}
-                <Card>
+                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base font-semibold text-neutral-900">
                       ⏱ 일정 판단
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3 text-sm">
-                    <p className="font-medium">
+                  <CardContent className="space-y-3 text-sm text-neutral-700">
+                    <p className="text-sm font-semibold text-neutral-800">
                       예상 소요 시간:{" "}
                       {formatEstimate(result.time_judgement?.total_estimate)}
                     </p>
                     {result.time_judgement?.estimate_reason?.length ? (
-                      <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                      <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                         {result.time_judgement.estimate_reason.map(
                           (reason: string, index: number) => (
                             <li key={index}>{reason}</li>
@@ -215,14 +222,14 @@ export default function Page() {
                 </Card>
 
                 {/* 협업 판단 */}
-                <Card>
+                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base font-semibold text-neutral-900">
                       👥 협업 판단
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2 text-sm">
-                    <p>
+                  <CardContent className="space-y-2 text-sm text-neutral-700">
+                    <p className="text-sm text-neutral-800">
                       주 담당 역할:{" "}
                       <strong>
                         {result.collaboration?.primary_role}
@@ -237,35 +244,35 @@ export default function Page() {
                 </Card>
 
                 {/* 우선순위 */}
-                <Card>
+                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base font-semibold text-neutral-900">
                       ⚡ 우선순위 조언
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2 text-sm">
+                  <CardContent className="space-y-2 text-sm text-neutral-700">
                     <Badge>
                       긴급도: {result.priority_advice?.urgency}
                     </Badge>
-                    <p className="text-muted-foreground">
+                    <p className="text-sm text-muted-foreground">
                       {result.priority_advice?.reason}
                     </p>
                   </CardContent>
                 </Card>
 
                 {/* 업무 진행 방향 */}
-                <Card>
+                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base font-semibold text-neutral-900">
                       🧭 업무 진행 방향
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2 text-sm">
-                    <p className="text-muted-foreground">
+                  <CardContent className="space-y-2 text-sm text-neutral-700">
+                    <p className="text-sm text-muted-foreground">
                       {result.work_direction?.summary}
                     </p>
                     {result.work_direction?.next_steps?.length ? (
-                      <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                      <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                         {result.work_direction.next_steps.map(
                           (step: string, index: number) => (
                             <li key={index}>{step}</li>

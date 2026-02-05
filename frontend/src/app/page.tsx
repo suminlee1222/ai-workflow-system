@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import Link from "next/link"
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
@@ -136,9 +137,14 @@ export default function Page() {
             <CardHeader className="space-y-1">
               <CardTitle>AI 판단 결과</CardTitle>
               {taskId && (
-                <p className="text-xs text-muted-foreground">
-                  업무 ID #{taskId} · 판단 기록 기반
-                </p>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs text-muted-foreground">
+                    업무 ID #{taskId} · 판단 기록 기반
+                  </p>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={`/tasks/${taskId}`}>상세 보기</Link>
+                  </Button>
+                </div>
               )}
             </CardHeader>
 

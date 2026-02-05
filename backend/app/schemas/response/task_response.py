@@ -18,3 +18,6 @@ class TaskResponse(BaseModel):
 class TaskCreateResponse(BaseModel):
     task: TaskResponse
     ai_suggestion: AITaskSuggestionResponse
+
+class TaskListResponse(BaseModel):
+    tasks: List[TaskResponse]

@@ -34,6 +34,10 @@ export interface AITaskAnalysis {
     can_be_deferred: boolean
     reason: string
   }
+  work_direction: {
+    summary: string
+    next_steps: string[]
+  }
 }
 
 export interface AISuggestion {

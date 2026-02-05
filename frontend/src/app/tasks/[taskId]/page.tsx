@@ -298,6 +298,28 @@ export default function TaskDetailPage() {
                         </p>
                       </CardContent>
                     </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-base">
+                          🧭 업무 진행 방향
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <p className="text-muted-foreground">
+                          {result.work_direction?.summary}
+                        </p>
+                        {result.work_direction?.next_steps?.length ? (
+                          <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                            {result.work_direction.next_steps.map(
+                              (step: string, index: number) => (
+                                <li key={index}>{step}</li>
+                              )
+                            )}
+                          </ul>
+                        ) : null}
+                      </CardContent>
+                    </Card>
                   </div>
                 </CardContent>
               </Card>

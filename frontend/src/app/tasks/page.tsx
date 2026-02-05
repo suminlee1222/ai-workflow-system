@@ -61,8 +61,8 @@ export default function TaskListPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-8">
+    <div className="min-h-screen bg-gradient-to-b from-white/80 via-neutral-100 to-neutral-200/60">
+      <main className="mx-auto w-full max-w-5xl space-y-8 px-6 py-12">
         <header className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h1 className="text-3xl font-bold tracking-tight">

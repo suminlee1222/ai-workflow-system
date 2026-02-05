@@ -10,7 +10,7 @@ export default function RootLayout({
       <head>
         <title>업무 자동화</title>
       </head>
-      <body className="bg-gray-50 text-gray-900">
+      <body className="min-h-screen bg-neutral-100 text-gray-900 antialiased">
         {children}
       </body>
     </html>

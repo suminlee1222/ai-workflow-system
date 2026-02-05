@@ -72,7 +72,7 @@ export default function Page() {
   }, [taskId])
 
   return (
-    <div className="min-h-screen bg-neutral-100/70">
+    <div className="min-h-screen bg-gradient-to-b from-white/80 via-neutral-100 to-neutral-200/60">
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-12">
 
         {/* 헤더 */}

@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field, root_validator
 class TaskCreateRequest(BaseModel):
     project_id: int
     title: str
-    description: str | None = None
     content: str | None = Field(
         None,
         description="Deprecated. Use title instead."

@@ -12,7 +12,6 @@ class TaskResponse(BaseModel):
     task_id: int
     project_id: int
     title: str
-    description: Optional[str]
     status: str
 
 class TaskCreateResponse(BaseModel):

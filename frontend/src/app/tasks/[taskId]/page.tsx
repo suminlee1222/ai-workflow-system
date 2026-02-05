@@ -22,7 +22,6 @@ const API_BASE_URL =
 type TaskDetail = TaskResponse & {
   task?: {
     content?: string
-    description?: string
     title?: string
   }
 }
@@ -127,10 +126,7 @@ export default function TaskDetailPage() {
 
   const result = data?.ai_suggestion?.result
   const taskContent =
-    data?.task?.description ||
-    data?.task?.content ||
-    data?.task?.title ||
-    ""
+    data?.task?.content || data?.task?.title || ""
 
   return (
     <div className="min-h-screen bg-neutral-50">

@@ -221,28 +221,6 @@ export default function Page() {
                   </CardContent>
                 </Card>
 
-                {/* 협업 판단 */}
-                <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
-                  <CardHeader>
-                    <CardTitle className="text-base font-semibold text-neutral-900">
-                      👥 협업 판단
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2 text-sm text-neutral-700">
-                    <p className="text-sm text-neutral-800">
-                      주 담당 역할:{" "}
-                      <strong>
-                        {result.collaboration?.primary_role}
-                      </strong>
-                    </p>
-                    {result.collaboration?.review_required && (
-                      <Badge variant="outline">
-                        리뷰 필요
-                      </Badge>
-                    )}
-                  </CardContent>
-                </Card>
-
                 {/* 우선순위 */}
                 <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                   <CardHeader>

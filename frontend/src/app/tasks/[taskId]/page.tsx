@@ -212,7 +212,7 @@ export default function TaskDetailPage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3 text-sm text-neutral-700">
-                        <Badge variant="secondary" className="text-sm font-medium">
+                        <Badge variant="outline">
                           사고 비중:{" "}
                           {result.cognitive_load?.thinking_ratio}
                         </Badge>
@@ -233,7 +233,7 @@ export default function TaskDetailPage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3 text-sm text-neutral-700">
-                        <p className="text-sm font-medium text-neutral-800">
+                        <p className="text-sm font-semibold text-neutral-800">
                           예상 소요 시간:{" "}
                           {formatEstimate(
                             result.time_judgement?.total_estimate
@@ -249,12 +249,11 @@ export default function TaskDetailPage() {
                           </ul>
                         ) : null}
                         <Badge
-                          variant="outline"
-                          className={`text-sm font-medium ${
+                          variant={
                             result.time_judgement?.schedule_risk === "높음"
-                              ? "border-red-400 bg-red-50 text-red-600"
-                              : "border-neutral-200 bg-white text-neutral-700"
-                          }`}
+                              ? "destructive"
+                              : "outline"
+                          }
                         >
                           일정 리스크:{" "}
                           {result.time_judgement?.schedule_risk}
@@ -265,30 +264,11 @@ export default function TaskDetailPage() {
                     <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
                         <CardTitle className="text-base font-semibold text-neutral-900">
-                          👥 협업 판단
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm text-neutral-700">
-                        <p className="text-sm text-neutral-800">
-                          주 담당 역할:{" "}
-                          <strong>
-                            {result.collaboration?.primary_role}
-                          </strong>
-                        </p>
-                        {result.collaboration?.review_required && (
-                          <Badge variant="outline">리뷰 필요</Badge>
-                        )}
-                      </CardContent>
-                    </Card>
-
-                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
-                      <CardHeader>
-                        <CardTitle className="text-base font-semibold text-neutral-900">
                           ⚡ 우선순위 조언
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-2 text-sm text-neutral-700">
-                        <Badge className="text-sm font-medium">
+                        <Badge variant="outline">
                           긴급도: {result.priority_advice?.urgency}
                         </Badge>
                         <p className="text-sm text-muted-foreground">

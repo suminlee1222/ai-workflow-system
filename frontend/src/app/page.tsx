@@ -22,7 +22,6 @@ export default function Page() {
   const [taskId, setTaskId] = useState<number | null>(null)
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
-  const maxContentLength = 255
 
   /** 업무 생성 + AI 판단 요청 */
   const submit = async () => {
@@ -112,10 +111,9 @@ export default function Page() {
               rows={9}
               value={content}
               onChange={(e) =>
-                setContent(e.target.value.slice(0, maxContentLength))
+                setContent(e.target.value)
               }
               className="resize-none"
-              maxLength={maxContentLength}
             />
 
             <Button

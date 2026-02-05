@@ -132,14 +132,14 @@ npm run dev
 백엔드는 `backend/.env`를 사용하며, 기본값은 `backend/app/settings.py`에 정의되어 있습니다.
 
 ```
-AI_MODE=mock
-OPENAI_MODEL=gpt-4.1-mini
-OPENAI_API_KEY=your-key
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ai_workflow
-DB_USER=ai_user
-DB_PASSWORD=ai_pass
+AI_MODE=
+OPENAI_MODEL=
+OPENAI_API_KEY=
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
 ```
 
 CORS는 `CORS_ALLOW_ORIGINS`로 제어합니다.

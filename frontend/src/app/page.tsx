@@ -134,7 +134,7 @@ export default function Page() {
         {/* 결과 영역 */}
         {result && (
           <Card className="border border-neutral-200/70 bg-white shadow-sm">
-            <CardHeader className="space-y-2 border-b border-neutral-200/60">
+            <CardHeader className="space-y-2 border-b border-neutral-200/60 pb-4">
               <CardTitle className="text-base font-semibold text-neutral-900">
                 AI 판단 결과
               </CardTitle>
@@ -175,7 +175,7 @@ export default function Page() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3 text-sm text-neutral-700">
-                    <Badge variant="secondary">
+                    <Badge variant="outline">
                       사고 비중: {result.cognitive_load?.thinking_ratio}
                     </Badge>
                     <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
@@ -251,7 +251,7 @@ export default function Page() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-sm text-neutral-700">
-                    <Badge>
+                    <Badge variant="outline">
                       긴급도: {result.priority_advice?.urgency}
                     </Badge>
                     <p className="text-sm text-muted-foreground">

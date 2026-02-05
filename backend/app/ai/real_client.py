@@ -49,6 +49,7 @@ class OpenAIClient(AIClient):
 - schedule_risk: 낮음 | 보통 | 높음
 - urgency: 낮음 | 보통 | 높음
 - breakdown은 최소 3단계 이상 작성
+- estimate_reason은 예상 소요 시간을 산출한 근거를 간단히 나열
 
 {{
   "identity": {{
@@ -68,6 +69,7 @@ class OpenAIClient(AIClient):
   ],
   "time_judgement": {{
     "total_estimate": "",
+    "estimate_reason": [],
     "schedule_risk": "",
     "risk_reason": []
   }},
@@ -111,6 +113,7 @@ class OpenAIClient(AIClient):
                 "breakdown": [],
                 "time_judgement": {
                     "total_estimate": "unknown",
+                    "estimate_reason": ["AI 응답 파싱 실패"],
                     "schedule_risk": "보통",
                     "risk_reason": []
                 },

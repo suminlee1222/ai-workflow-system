@@ -22,6 +22,7 @@ export default function Page() {
   const [taskId, setTaskId] = useState<number | null>(null)
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
+  const maxContentLength = 255
 
   /** 업무 생성 + AI 판단 요청 */
   const submit = async () => {
@@ -110,8 +111,11 @@ export default function Page() {
 장애 원인 파악과 재발 방지를 하고 싶음.`}
               rows={9}
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e) =>
+                setContent(e.target.value.slice(0, maxContentLength))
+              }
               className="resize-none"
+              maxLength={maxContentLength}
             />
 
             <Button

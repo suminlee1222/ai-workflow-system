@@ -182,39 +182,41 @@ export default function TaskDetailPage() {
             </Card>
 
             {result && (
-              <Card className="border-l-4 border-blue-500">
-                <CardHeader className="space-y-1">
-                  <CardTitle>기존 AI 판단 결과</CardTitle>
+              <Card className="border border-neutral-200/70 bg-white shadow-sm">
+                <CardHeader className="space-y-2 border-b border-neutral-200/60">
+                  <CardTitle className="text-base font-semibold text-neutral-900">
+                    기존 AI 판단 결과
+                  </CardTitle>
                   <p className="text-xs text-muted-foreground">
                     기존 판단 기록을 기반으로 표시됩니다.
                   </p>
                 </CardHeader>
 
-                <CardContent className="space-y-10">
-                  <div className="space-y-1">
-                    <p className="text-sm text-muted-foreground">
+                <CardContent className="space-y-10 pt-6">
+                  <div className="space-y-2">
+                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                       업무 성격 요약
                     </p>
-                    <p className="text-base font-semibold">
+                    <p className="text-base font-semibold text-neutral-900">
                       {result.identity?.one_liner}
                     </p>
                   </div>
 
                   <Separator />
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
-                        <CardTitle className="text-base">
+                        <CardTitle className="text-base font-semibold text-neutral-900">
                           🧠 인지적 부담
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3 text-sm">
-                        <Badge variant="secondary">
+                      <CardContent className="space-y-3 text-sm text-neutral-700">
+                        <Badge variant="secondary" className="text-sm">
                           사고 비중:{" "}
                           {result.cognitive_load?.thinking_ratio}
                         </Badge>
-                        <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                        <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                           {result.cognitive_load?.reason?.map(
                             (r: string, i: number) => (
                               <li key={i}>{r}</li>
@@ -224,21 +226,21 @@ export default function TaskDetailPage() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
-                        <CardTitle className="text-base">
+                        <CardTitle className="text-base font-semibold text-neutral-900">
                           ⏱ 일정 판단
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3 text-sm">
-                        <p className="font-medium">
+                      <CardContent className="space-y-3 text-sm text-neutral-700">
+                        <p className="text-sm font-semibold text-neutral-800">
                           예상 소요 시간:{" "}
                           {formatEstimate(
                             result.time_judgement?.total_estimate
                           )}
                         </p>
                         {result.time_judgement?.estimate_reason?.length ? (
-                          <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                          <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                             {result.time_judgement.estimate_reason.map(
                               (reason: string, index: number) => (
                                 <li key={index}>{reason}</li>
@@ -253,6 +255,7 @@ export default function TaskDetailPage() {
                               ? "destructive"
                               : "outline"
                           }
+                          className="text-sm"
                         >
                           일정 리스크:{" "}
                           {result.time_judgement?.schedule_risk}
@@ -260,14 +263,14 @@ export default function TaskDetailPage() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
-                        <CardTitle className="text-base">
+                        <CardTitle className="text-base font-semibold text-neutral-900">
                           👥 협업 판단
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <p>
+                      <CardContent className="space-y-2 text-sm text-neutral-700">
+                        <p className="text-sm text-neutral-800">
                           주 담당 역할:{" "}
                           <strong>
                             {result.collaboration?.primary_role}
@@ -279,34 +282,34 @@ export default function TaskDetailPage() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
-                        <CardTitle className="text-base">
+                        <CardTitle className="text-base font-semibold text-neutral-900">
                           ⚡ 우선순위 조언
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <Badge>
+                      <CardContent className="space-y-2 text-sm text-neutral-700">
+                        <Badge className="text-sm">
                           긴급도: {result.priority_advice?.urgency}
                         </Badge>
-                        <p className="text-muted-foreground">
+                        <p className="text-sm text-muted-foreground">
                           {result.priority_advice?.reason}
                         </p>
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md">
                       <CardHeader>
-                        <CardTitle className="text-base">
+                        <CardTitle className="text-base font-semibold text-neutral-900">
                           🧭 업무 진행 방향
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <p className="text-muted-foreground">
+                      <CardContent className="space-y-2 text-sm text-neutral-700">
+                        <p className="text-sm text-muted-foreground">
                           {result.work_direction?.summary}
                         </p>
                         {result.work_direction?.next_steps?.length ? (
-                          <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                          <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                             {result.work_direction.next_steps.map(
                               (step: string, index: number) => (
                                 <li key={index}>{step}</li>

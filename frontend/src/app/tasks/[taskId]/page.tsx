@@ -14,6 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { DecisionRenderMode } from "@/types/decision"
 import { TaskResponse } from "@/types/task"
+import { formatEstimate } from "@/lib/utils"
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
@@ -236,7 +237,9 @@ export default function TaskDetailPage() {
                       <CardContent className="space-y-3 text-sm">
                         <p className="font-medium">
                           예상 소요 시간:{" "}
-                          {result.time_judgement?.total_estimate}
+                          {formatEstimate(
+                            result.time_judgement?.total_estimate
+                          )}
                         </p>
                         <Badge
                           variant={

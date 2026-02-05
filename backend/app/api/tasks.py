@@ -1,9 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from app.schemas.task import TaskCreateRequest
-from app.schemas.response.task_response import TaskCreateResponse
+from app.schemas.response.task_response import (
+    TaskCreateResponse,
+    TaskListResponse,
+)
 from app.domain.services.task_service import (
     create_task_service,
     get_task_service,
+    get_tasks_service,
 )
 from app.schemas.decision import DecisionRenderRequest, DecisionRenderResponse
 from app.domain.services.decision_service import render_decision_text_service
@@ -15,6 +19,11 @@ router = APIRouter()
 @router.post("", response_model=TaskCreateResponse)
 def create_task(request: TaskCreateRequest):
     return create_task_service(request)
+
+
+@router.get("", response_model=TaskListResponse)
+def list_tasks():
+    return get_tasks_service()
 
 
 @router.get("/{task_id}")

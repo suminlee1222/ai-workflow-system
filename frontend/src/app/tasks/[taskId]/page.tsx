@@ -140,7 +140,7 @@ export default function TaskDetailPage() {
               업무 상세
             </h1>
             <Button asChild variant="outline">
-              <Link href="/">목록으로</Link>
+              <Link href="/tasks">목록으로</Link>
             </Button>
           </div>
           <p className="text-muted-foreground text-base">

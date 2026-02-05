@@ -103,3 +103,23 @@ def get_task_service(task_id: int):
                 "created_at": ai_suggestion.created_at
             } if ai_suggestion else None
         }
+
+
+def get_tasks_service():
+    with session_scope() as db:
+        tasks = db.execute(
+            select(TaskModel).order_by(desc(TaskModel.id))
+        ).scalars().all()
+
+        return {
+            "tasks": [
+                {
+                    "task_id": task.id,
+                    "project_id": task.project_id,
+                    "title": task.title,
+                    "description": task.description,
+                    "status": task.status
+                }
+                for task in tasks
+            ]
+        }

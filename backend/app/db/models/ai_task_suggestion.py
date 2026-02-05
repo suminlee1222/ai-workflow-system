@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, JSON, DateTime
 from sqlalchemy.sql import func
-from app.db.base import Base
+from app.db.session import Base
 
 class AITaskSuggestion(Base):
     __tablename__ = "ai_task_suggestions"
